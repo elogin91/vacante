@@ -7,11 +7,13 @@ function MyNavBar() {
     <>
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Empleo Pro</Navbar.Brand>
+          <Navbar.Brand href="/">Empleo Pro</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#pricing">Mis vacantes</Nav.Link>
-            <Nav.Link href="#pricing">Mis solicitudes</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/misVacantes">Mis vacantes</Nav.Link>
+            <Nav.Link href="/misSolicitudes">Mis solicitudes</Nav.Link>
+            <Nav.Link href="/login">Iniciar Sesión</Nav.Link>
+            <Nav.Link href="/register">Registrate</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
