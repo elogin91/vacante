@@ -1,5 +1,6 @@
 // Componente de inicio de sesión
 import React, { useState } from 'react';
+import MyNavBar from '../../components/NavBar/MyNavBar';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -28,7 +29,11 @@ const Login = () => {
   };
 
   return (
+    
     <div>
+      <header>
+        <MyNavBar></MyNavBar>
+      </header>
       <h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Usuario" value={username} onChange={(e) => setUsername(e.target.value)} />
