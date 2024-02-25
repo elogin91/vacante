@@ -2,6 +2,7 @@ import VacantesList from "../../components/Listados/VacantesList";
 import React, { useState, useEffect } from 'react';
 import MyNavBar from "../../components/NavBar/MyNavBar";
 
+
 const Home = () => {
   
   const [vacantes, setVacantes] = useState([]);

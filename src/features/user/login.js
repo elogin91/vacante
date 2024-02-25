@@ -1,6 +1,7 @@
-// Componente de inicio de sesión
 import React, { useState } from 'react';
 import MyNavBar from '../../components/NavBar/MyNavBar';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/esm/Button';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -8,38 +9,44 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const response = await fetch('http://tu-backend.com/login', {
+
+    const response = await fetch('http://localhost:8084/api/auth/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ username, password })
     });
-
     if (response.ok) {
-      const { token } = await response.json();
-      // Almacena el token en el localStorage
-      localStorage.setItem('token', token);
-      // Redirecciona a la página de inicio, por ejemplo
+      const { accessToken, username } = await response.json();
+      localStorage.setItem('token', accessToken);
+      localStorage.setItem('userName', username);
       window.location.href = '/';
-    } else {
-      // Maneja el error, por ejemplo, mostrando un mensaje al usuario
     }
   };
 
   return (
-    
-    <div>
+
+    <div className='login'>
       <header>
         <MyNavBar></MyNavBar>
       </header>
-      <h2>Iniciar sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Usuario" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Iniciar sesión</button>
-      </form>
+      <main className='container'>
+        <div className='bg-light p-5 rounded'>
+          <h2>Iniciar Sesión</h2>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" >
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </Form.Group>
+            <Button type="submit">Entrar</Button>
+          </Form>
+        </div>
+      </main>
     </div>
   );
 };
