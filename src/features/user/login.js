@@ -18,9 +18,10 @@ const Login = () => {
       body: JSON.stringify({ username, password })
     });
     if (response.ok) {
-      const { accessToken, username } = await response.json();
+      const { accessToken, username, perfil } = await response.json();
       localStorage.setItem('token', accessToken);
       localStorage.setItem('userName', username);
+      localStorage.setItem('perfil', perfil)
       window.location.href = '/';
     }
   };

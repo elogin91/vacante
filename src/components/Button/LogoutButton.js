@@ -8,6 +8,7 @@ const LogoutButton = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
+    localStorage.removeItem('perfil');
     window.location.href = '/';
   };
 

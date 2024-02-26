@@ -4,8 +4,9 @@ import Home from './features/home/home';
 import Login from './features/user/login';
 import Register from './features/user/register';
 import Profile from './features/user/perfil';
-import DetalleVacante from './features/VerDetalles/detalleVacante';
+import DetalleVacante from './features/vacante/detalleVacante';
 import MisSolicitudes from './features/solicitud/misSolicitudes';
+import AltaVacante from './features/vacante/altaVacante'
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/profile" element={<Profile/>} />
                 <Route path="/detalleVacante/:id" element={<DetalleVacante/>} />
                 <Route path="/misSolicitudes" element={<MisSolicitudes/>} />
+                <Route path="/altaVacante" element={<AltaVacante/>} />
             </Routes>
         </Router>
     );

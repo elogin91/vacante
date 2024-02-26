@@ -2,10 +2,10 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import LogOutBtn from '../Button/LogoutButton';
-import NoAuthItem from '../AuthItem/NoAuthItem'
 import { Link } from 'react-router-dom';
-import AuthItem from '../AuthItem/AuthItem';
 import Button from "react-bootstrap/Button";
+import Guard from '../Guard/Guard';
+
 
 function MyNavBar() {
 
@@ -21,36 +21,45 @@ function MyNavBar() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link className="me-auto" href="/">Home</Nav.Link>
-              <Nav.Link href="/">Vacantes</Nav.Link>
-              <Nav.Link href="/misVacantes">Mis Vacantes</Nav.Link>
-              <Nav.Link href="/crearVacante">CrearVacante</Nav.Link>
-              <Nav.Link href="/misSolicitudes">Mis solicitudes</Nav.Link>
-              <Nav.Link href="/profile">Mi Perfil</Nav.Link>
+              <Guard requiredRoles={["Anonymous", "Empresa", "Usuario"]}>
+                <Nav.Link className="me-auto" href="/">Home</Nav.Link>
+              </Guard>
+              <Guard requiredRoles={["Empresa"]}>
+                <Nav.Link href="/misVacantes">Todas Vacantes</Nav.Link>
+              </Guard>
+              <Guard requiredRoles={["Empresa"]}>
+                <Nav.Link href="/altaVacante">CrearVacante</Nav.Link>
+              </Guard>
+              <Guard requiredRoles={["Empresa", "Usuario"]}>
+                <Nav.Link href="/misSolicitudes">Solicitudes</Nav.Link>
+              </Guard>
+              <Guard requiredRoles={["Empresa", "Usuario"]}>
+                <Nav.Link href="/profile">Mi Perfil</Nav.Link>
+              </Guard>
             </Nav>
             <Nav className="justify-content-end">
-              <AuthItem>
-              <Navbar.Text className='mx-3'>
-                Signed in as: {localStorage.getItem('userName')}
-              </Navbar.Text>
-              </AuthItem>
-              <Link to={`/login`}>
-                <NoAuthItem>
+              <Guard requiredRoles={["Empresa", "Usuario"]}>
+                <Navbar.Text className='mx-3'>
+                  Signed in as: {localStorage.getItem('userName')}
+                </Navbar.Text>
+              </Guard>
+              <Guard requiredRoles={["Anonymous"]}>
+                <Link to={`/login`}>
                   <Button className="mx-1" variant="success">Iniciar Sesión</Button>
-                </NoAuthItem>
-              </Link>
-              <Link to={`/register`}>
-                <NoAuthItem>
+                </Link>
+              </Guard>
+              <Guard requiredRoles={["Anonymous"]}>
+                <Link to={`/register`}>
                   <Button className="mx-1" variant="success">Regístrate</Button>
-                </NoAuthItem>
-              </Link>
-              <AuthItem>
+                </Link>
+              </Guard>
+              <Guard requiredRoles={["Empresa", "Usuario"]}>
                 <LogOutBtn ></LogOutBtn>
-              </AuthItem>
+              </Guard>
             </Nav>
           </Navbar.Collapse>
-        </Container>
-      </Navbar>
+        </Container >
+      </Navbar >
     </>)
 }
 
