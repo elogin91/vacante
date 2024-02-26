@@ -14,7 +14,7 @@ const Home = () => {
 
   const fetchVacantes = async () => {
     try {
-      const response = await fetch('http://localhost:8084/vacantes/');
+      const response = await fetch('http://localhost:8084/public/');
       const data = await response.json();
       setVacantes(data);
     } catch (error) {

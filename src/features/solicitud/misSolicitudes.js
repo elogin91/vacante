@@ -1,5 +1,4 @@
 
-import Table from 'react-bootstrap/Table';
 import MyNavBar from '../../components/NavBar/MyNavBar';
 import React, { useState, useEffect } from 'react';
 import SolicitudesList from '../../components/Listados/SolicitudesList';

@@ -18,7 +18,7 @@ const DetalleVacante = () => {
 
   const fetchVacante = async () => {
     try {
-      const response = await fetch("http://localhost:8084/vacantes/verDetalle/" + id);
+      const response = await fetch("http://localhost:8084/public/verDetalle/" + id);
       const data = await response.json();
       setVacante(data);
     } catch (error) {
@@ -58,6 +58,7 @@ const DetalleVacante = () => {
           <p>{vacante.descripcion}</p>
           <p>{vacante.detalles}</p>
           <p>Salario:{vacante.salario}</p>
+
           <Guard requiredRoles={["Usuario"]}>
             <Form onSubmit={handleSubmit} className='w-75'>
               <Form.Group className='mb-2'>
@@ -67,16 +68,19 @@ const DetalleVacante = () => {
               <Button type="submit" variant="success">Solicitar Vacante</Button>
             </Form>
           </Guard>
+
           <Guard requiredRoles={["Anonymous"]}>
             <Link to={`/login`}>
               <Button className="mx-1" variant="success">Iniciar Sesión</Button>
             </Link>
           </Guard>
+
           <Guard requiredRoles={["Anonymous"]}>
             <Link to={`/register`}>
               <Button className="mx-1" variant="success">Regístrate</Button>
             </Link>
           </Guard>
+          
         </div>
       </main >
     </div >

@@ -33,14 +33,14 @@ function SolicitudesList({ solicitudes }) {
               <td>{solicitud.vacante.nombre}</td>
               <td>{solicitud.vacante.estatus}</td>
               <td>
-              <ButtonGroup aria-label="Basic example">
+              {/* <ButtonGroup aria-label="Basic example">
               <Link to={`/solicitudes/cancelar/${solicitud.idSolicitud}`}>
                   <Button className="mx-1" variant="danger">Cancelar</Button>
               </Link>
               <Link to={`/detalleVacante/${solicitud.vacante.idVacante}`}>
                   <Button className="mx-1" variant="primary">Detalle Vacante</Button>
               </Link>
-              </ButtonGroup>
+              </ButtonGroup> */}
               </td>
             </tr>
           )
