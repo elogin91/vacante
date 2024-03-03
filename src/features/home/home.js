@@ -6,7 +6,6 @@ import MyNavBar from "../../components/NavBar/MyNavBar";
 const Home = () => {
   
   const [vacantes, setVacantes] = useState([]);
-  const [selectedVacante, setSelectedVacante] = useState(null);
 
   useEffect(() => {
     fetchVacantes();

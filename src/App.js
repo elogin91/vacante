@@ -7,6 +7,8 @@ import Profile from './features/user/perfil';
 import DetalleVacante from './features/vacante/detalleVacante';
 import MisSolicitudes from './features/solicitud/misSolicitudes';
 import AltaVacante from './features/vacante/altaVacante'
+import MisVacantes from './features/vacante/misVacantes';
+import ModificarVacante from './features/vacante/modificarVacantes';
 
 const App = () => {
     return (
@@ -19,6 +21,8 @@ const App = () => {
                 <Route path="/detalleVacante/:id" element={<DetalleVacante/>} />
                 <Route path="/misSolicitudes" element={<MisSolicitudes/>} />
                 <Route path="/altaVacante" element={<AltaVacante/>} />
+                <Route path='/misVacantes' element={<MisVacantes/>}/>
+                <Route path='/modificar/:id' element={<ModificarVacante/>}/>
             </Routes>
         </Router>
     );

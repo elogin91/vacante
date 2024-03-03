@@ -10,8 +10,6 @@ const Guard = ({ requiredRoles, children }) => {
             perfil = ["Anonymous"];
         };
         let found = roles.find(s => perfil == s);
-        console.log(perfil);
-        console.log(found);
         return found !== undefined;
     }
 

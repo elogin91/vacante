@@ -5,7 +5,7 @@ function VacantesList({vacantes}) {
   return (
     <div>
     {vacantes.map ((vacante) => {
-      return <VacanteCard vacante={vacante}/>
+      return <VacanteCard  key={vacante.idVacante} vacante={vacante}/>
     })}
     </div>
   );

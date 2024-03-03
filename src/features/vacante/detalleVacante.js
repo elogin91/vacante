@@ -5,6 +5,7 @@ import MyNavBar from '../../components/NavBar/MyNavBar';
 import Button from "react-bootstrap/Button";
 import { Link } from 'react-router-dom';
 import Guard from '../../components/Guard/Guard';
+import TablaSolicitudesPorVacante from '../../components/Tablas/TablaSolicitudesPorVacante';
 
 
 const DetalleVacante = () => {
@@ -62,7 +63,7 @@ const DetalleVacante = () => {
           <Guard requiredRoles={["Usuario"]}>
             <Form onSubmit={handleSubmit} className='w-75'>
               <Form.Group className='mb-2'>
-                <Form.Label>Dejenos un breve comentario de ¿por qué es la persona indicada para este puesto?</Form.Label>
+                <Form.Label>URL de tu CV</Form.Label>
                 <Form.Control as="textarea" value={comentario} onChange={(e) => setComentario(e.target.value)} id="comentario" rows={3} />
               </Form.Group>
               <Button type="submit" variant="success">Solicitar Vacante</Button>
@@ -81,6 +82,7 @@ const DetalleVacante = () => {
             </Link>
           </Guard>
           
+          <TablaSolicitudesPorVacante id={id}/>
         </div>
       </main >
     </div >

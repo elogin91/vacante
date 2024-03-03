@@ -25,7 +25,7 @@ function MyNavBar() {
                 <Nav.Link className="me-auto" href="/">Home</Nav.Link>
               </Guard>
               <Guard requiredRoles={["Empresa"]}>
-                <Nav.Link href="/misVacantes">Todas Vacantes</Nav.Link>
+                <Nav.Link href="/misVacantes">Modificar Vacantes</Nav.Link>
               </Guard>
               <Guard requiredRoles={["Empresa"]}>
                 <Nav.Link href="/altaVacante">CrearVacante</Nav.Link>
