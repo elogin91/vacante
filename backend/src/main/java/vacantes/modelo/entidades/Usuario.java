@@ -36,7 +36,7 @@ public class Usuario implements Serializable {
 	//uni-directional many-to-many association to Perfil
 	@ManyToMany
 	@JoinTable(
-		name="usuarioperfil"
+		name="UsuarioPerfil"
 		, joinColumns={
 			@JoinColumn(name="username")
 			}
