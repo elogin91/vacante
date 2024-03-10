@@ -11,7 +11,7 @@ import TablaSolicitudesPorVacante from '../../components/Tablas/TablaSolicitudes
 const DetalleVacante = () => {
   let { id } = useParams();
   const [vacante, setVacante] = useState([]);
-  const [comentario, setComentario] = useState([]);
+  const [archivo, setArchivo] = useState([]);
 
   useEffect(() => {
     fetchVacante();
@@ -27,10 +27,10 @@ const DetalleVacante = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const submitNuevaSolicitud = async (e) => {
     e.preventDefault();
 
-    const nuevaSolicitud = { archivo: "miCv.pdf", comentario, estado: 0, fecha: Date.now(), vacante };
+    const nuevaSolicitud = { archivo, comentario:"NA", estado: 0, fecha: Date.now(), vacante };
     const response = await fetch('http://localhost:8084/solicitudes/alta', {
       method: 'POST',
       headers: {
@@ -44,7 +44,7 @@ const DetalleVacante = () => {
       window.location.href = '/';
     }
   };
-  
+
   return (
     <div className="detalleVacante ">
       <header>
@@ -61,10 +61,10 @@ const DetalleVacante = () => {
           <p>Salario:{vacante.salario}</p>
 
           <Guard requiredRoles={["Usuario"]}>
-            <Form onSubmit={handleSubmit} className='w-75'>
+            <Form onSubmit={submitNuevaSolicitud} className='w-75'>
               <Form.Group className='mb-2'>
                 <Form.Label>URL de tu CV</Form.Label>
-                <Form.Control as="textarea" value={comentario} onChange={(e) => setComentario(e.target.value)} id="comentario" rows={3} />
+                <Form.Control type="text" required placeholder="archivo" value={archivo} onChange={(e) => setArchivo(e.target.value)} />
               </Form.Group>
               <Button type="submit" variant="success">Solicitar Vacante</Button>
             </Form>
@@ -81,8 +81,10 @@ const DetalleVacante = () => {
               <Button className="mx-1" variant="success">Regístrate</Button>
             </Link>
           </Guard>
-          
-          <TablaSolicitudesPorVacante id={id}/>
+
+          <Guard requiredRoles={["Empresa"]}>
+            <TablaSolicitudesPorVacante id={id} />
+          </Guard>
         </div>
       </main >
     </div >

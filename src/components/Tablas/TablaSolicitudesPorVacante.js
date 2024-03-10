@@ -10,6 +10,8 @@ const TablaSolicitudesPorVacante = ({id}) => {
     }
     ]);
 
+    const [newComentario, setNewComentario] =useState('');
+
   useEffect(() => {
     fetchSolicitudes();
   }, []);
@@ -39,7 +41,7 @@ const TablaSolicitudesPorVacante = ({id}) => {
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
 
             },
-            body: JSON.stringify(solicitudes[index].comentarios)
+            body: JSON.stringify(solicitudes[index])
         });
     };
 
@@ -70,7 +72,7 @@ const TablaSolicitudesPorVacante = ({id}) => {
                             </td>
                             <td>
                                 <ButtonGroup>
-                                    <Button className="mx-1" variant="success">Adjudicar</Button>
+                                    <Button className="mx-1" variant="success" onClick={() => handleSubmit(index)}>Adjudicar</Button>
                                     <Button className="mx-1" variant="danger">Descartar</Button>
                                 </ButtonGroup>
                             </td>

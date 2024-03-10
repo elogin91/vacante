@@ -34,7 +34,7 @@ function MyNavBar() {
                 <Nav.Link href="/misSolicitudes">Solicitudes</Nav.Link>
               </Guard>
               <Guard requiredRoles={["Empresa", "Usuario"]}>
-                <Nav.Link href="/profile">Mi Perfil</Nav.Link>
+                <Nav.Link href="/profile" >Mi Perfil</Nav.Link>
               </Guard>
             </Nav>
             <Nav className="justify-content-end">
