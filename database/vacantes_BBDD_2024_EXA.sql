@@ -67,8 +67,8 @@ CREATE TABLE `UsuarioPerfil` (
 
 -- Insertar datos en la tabla Categorias
 INSERT INTO Categorias (nombre, descripcion) VALUES 
-('Tecnología', 'Vacantes relacionadas con el sector tecnológico'),
-('Administración', 'Vacantes relacionadas con el área administrativa'),
+('Sector IT', 'Vacantes relacionadas con el sector tecnológico'),
+('Administrativo', 'Vacantes relacionadas con el área administrativa'),
 ('Ventas', 'Vacantes relacionadas con el área de ventas');
 
 -- Insertar datos en la tabla Perfiles

@@ -53,7 +53,7 @@ const Home = () => {
       <main>
         <div className="d-flex justify-content-center">
           <Form.Group>
-            <Form.Label>Buscar vacantes por ccategorias</Form.Label>
+            <Form.Label>Buscar vacantes por categorias</Form.Label>
             <Form.Select aria-label="categoria" required defaultValue="" className="mb-3 " onChange={(e) => fetchVacantes(e.target.value)}>
               <option key='0' value="">Todas</option>
               {categorias.map((categoria) => {
