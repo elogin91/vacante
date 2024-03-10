@@ -7,7 +7,7 @@ function SolicitudesList({ solicitudes }) {
 
   const cancelarSubmit = async (index) => {
 
-    const response = await fetch(window.location.hostname + ':8084/solicitudes/cancelar/'+index, {
+    const response = await fetch('http://' + window.location.hostname + ':8084/solicitudes/cancelar/'+index, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

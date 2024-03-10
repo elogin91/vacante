@@ -15,7 +15,7 @@ const Home = () => {
 
   const fetchCategorias = async () => {
     try {
-      const response = await fetch(window.location.hostname + ":8084/categorias/todas", {
+      const response = await fetch('http://' + window.location.hostname + ":8084/categorias/todas", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Home = () => {
 
   const fetchVacantes = async (categoria = '') => {
     try {
-      const response = await fetch(window.location.hostname + ':8084/vacantes/' + (categoria ? "buscar/"+categoria : ''));
+      const response = await fetch('http://' + window.location.hostname + ':8084/vacantes/' + (categoria ? "buscar/"+categoria : ''));
       const data = await response.json();
       setVacantes(data);
     } catch (error) {

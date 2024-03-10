@@ -13,7 +13,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(window.location.hostname + ':8084/api/auth/signup', {
+    const response = await fetch('http://' + window.location.hostname + ':8084/api/auth/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

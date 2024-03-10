@@ -17,7 +17,7 @@ const  MisVacantes  = () => {
 
     const fetchCategorias = async () => {
         try {
-            const response = await fetch(window.location.hostname + ':8084/categorias/todas', {
+            const response = await fetch('http://' + window.location.hostname + ':8084/categorias/todas', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const  MisVacantes  = () => {
   
     const fetchVacantes = async () => {
       try {
-        const response = await fetch(window.location.hostname + ':8084/vacantes/',{
+        const response = await fetch('http://' + window.location.hostname + ':8084/vacantes/',{
             method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

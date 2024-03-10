@@ -17,7 +17,7 @@ const TablaSolicitudesPorVacante = ({id}) => {
 
   const fetchSolicitudes = async () => {
     try {
-      const response = await fetch(window.location.hostname + ':8084/solicitudes/porVacante/' +id, {
+      const response = await fetch('http://' + window.location.hostname + ':8084/solicitudes/porVacante/' +id, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+ localStorage.getItem('token')
@@ -33,7 +33,7 @@ const TablaSolicitudesPorVacante = ({id}) => {
 
     const adjudicarSubmit = async (index) => {
 
-        const response = await fetch(window.location.hostname + ':8084/solicitudes/adjudicar/'+index, {
+        const response = await fetch('http://' + window.location.hostname + ':8084/solicitudes/adjudicar/'+index, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const TablaSolicitudesPorVacante = ({id}) => {
 
     const cancelarSubmit = async (index) => {
 
-        const response = await fetch(window.location.hostname + ':8084/solicitudes/cancelar/'+index, {
+        const response = await fetch('http://' + window.location.hostname + ':8084/solicitudes/cancelar/'+index, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

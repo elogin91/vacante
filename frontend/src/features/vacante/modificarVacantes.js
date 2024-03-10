@@ -13,7 +13,7 @@ const ModificarVacante = () => {
 
     const fetchCategorias = async () => {
         try {
-            const response = await fetch(window.location.hostname + ':8084/categorias/todas', {
+            const response = await fetch('http://' + window.location.hostname + ':8084/categorias/todas', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const ModificarVacante = () => {
 
     const fetchVacante = async () => {
         try {
-            const response = await fetch(window.location.hostname + ':8084/vacantes/verDetalle/' + id);
+            const response = await fetch('http://' + window.location.hostname + ':8084/vacantes/verDetalle/' + id);
             const data = await response.json();
             setVacante(data);
         } catch (error) {
@@ -58,7 +58,7 @@ const ModificarVacante = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(window.location.hostname + ':8084/vacantes/modificandoVacante', {
+        const response = await fetch('http://' + window.location.hostname + ':8084/vacantes/modificandoVacante', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

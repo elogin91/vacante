@@ -19,7 +19,7 @@ const DetalleVacante = () => {
 
   const fetchVacante = async () => {
     try {
-      const response = await fetch(window.location.hostname + ':8084/vacantes/verDetalle/' + id, {
+      const response = await fetch('http://' + window.location.hostname + ':8084/vacantes/verDetalle/' + id, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -36,7 +36,7 @@ const DetalleVacante = () => {
     e.preventDefault();
 
     const nuevaSolicitud = { archivo, comentario: "NA", estado: 0, fecha: Date.now(), vacante };
-    const response = await fetch(window.location.hostname + ':8084/solicitudes/alta', {
+    const response = await fetch('http://' + window.location.hostname + ':8084/solicitudes/alta', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
