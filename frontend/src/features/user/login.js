@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:8084/api/auth/signin', {
+    const response = await fetch(window.location.hostname + ':8084/api/auth/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

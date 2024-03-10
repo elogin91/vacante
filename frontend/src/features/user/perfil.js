@@ -14,7 +14,7 @@ const Profile = ({ authToken }) => {
     const fetchUserProfile = async () => {
       try {
 
-        const response = await fetch('http://localhost:8084/profile', {
+        const response = await fetch(window.location.hostname + ':8084/profile', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const Profile = ({ authToken }) => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch('http://localhost:8084/profile/modificar', {
+      const response = await fetch(window.location.hostname + ':8084/profile/modificar', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

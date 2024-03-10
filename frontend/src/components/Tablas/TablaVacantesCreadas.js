@@ -6,7 +6,7 @@ import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 
 const TablaVacantesCreadas = ({ vacantes, categorias }) => {
   const cancelSubmit = async (id) => {
-    const response = await fetch('http://localhost:8084/vacantes/cancelar/' + id, {
+    const response = await fetch(window.location.hostname + ':8084/vacantes/cancelar/' + id, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

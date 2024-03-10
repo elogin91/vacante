@@ -13,7 +13,7 @@ const  MisSolicitudes  = () => {
 
   const fetchSolicitudes = async () => {
     try {
-      const response = await fetch('http://localhost:8084/solicitudes/verTodas', {
+      const response = await fetch(window.location.hostname + ':8084/solicitudes/verTodas', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+ localStorage.getItem('token')

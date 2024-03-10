@@ -12,7 +12,7 @@ const AltaVacante = () => {
 
     const fetchCategorias = async () => {
         try {
-            const response = await fetch("http://localhost:8084/categorias/todas", {
+            const response = await fetch(window.location.hostname + ':8084/categorias/todas', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const AltaVacante = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:8084/vacantes/altaVacante', {
+        const response = await fetch(window.location.hostname + ':8084/vacantes/altaVacante', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
