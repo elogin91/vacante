@@ -30,8 +30,8 @@ function MyNavBar() {
               <Guard requiredRoles={["Empresa"]}>
                 <Nav.Link href="/altaVacante">CrearVacante</Nav.Link>
               </Guard>
-              <Guard requiredRoles={["Empresa", "Usuario"]}>
-                <Nav.Link href="/misSolicitudes">Solicitudes</Nav.Link>
+              <Guard requiredRoles={["Usuario"]}>
+                <Nav.Link href="/misSolicitudes">Mis Solicitudes</Nav.Link>
               </Guard>
               <Guard requiredRoles={["Empresa", "Usuario"]}>
                 <Nav.Link href="/profile" >Mi Perfil</Nav.Link>

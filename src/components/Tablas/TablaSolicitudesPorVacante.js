@@ -1,16 +1,15 @@
 import Table from "react-bootstrap/esm/Table";
-import { Form, Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 
 const TablaSolicitudesPorVacante = ({id}) => {
     const [solicitudes, setSolicitudes] = useState([ {
-        comentarios : ""
+        //comentarios : ""
     }
     ]);
 
-    const [newComentario, setNewComentario] =useState('');
+    //const [newComentario, setNewComentario] =useState('');
 
   useEffect(() => {
     fetchSolicitudes();
@@ -32,17 +31,36 @@ const TablaSolicitudesPorVacante = ({id}) => {
   };
 
 
-    const handleSubmit = async (index) => {
+    const adjudicarSubmit = async (index) => {
 
-        const response = await fetch('http://localhost:8084/' +  index, {
-            method: 'POST',
+        const response = await fetch('http://localhost:8084/solicitudes/adjudicar/'+index, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
 
             },
-            body: JSON.stringify(solicitudes[index])
+
         });
+        if (response.ok) {
+            window.location.reload();
+          }
+    };
+
+    const cancelarSubmit = async (index) => {
+
+        const response = await fetch('http://localhost:8084/solicitudes/cancelar/'+index, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+
+            },
+
+        });
+        if (response.ok) {
+            fetchSolicitudes();
+          }
     };
 
     return (
@@ -59,12 +77,20 @@ const TablaSolicitudesPorVacante = ({id}) => {
             </thead>
             <tbody>
                 {solicitudes.map((solicitud, index) => {
+                    let estadoSolicitud = "";
+                    if (solicitud.estado === 0) {
+                      estadoSolicitud = "Pendiente";
+                    } else if (solicitud.estado === 1) {
+                      estadoSolicitud = "Adjudicada";
+                    } else {
+                      estadoSolicitud = "Descartado";
+                    }
                     return (
                         <tr key={index}>
                             <td>{solicitud.fecha}</td>
                             <td>{solicitud.nombre}</td>
                             <td>{solicitud.archivo}</td>
-                            <td>{solicitud.estado}</td>
+                            <td>{estadoSolicitud}</td>
                             <td>
                            <textarea key={solicitud.idSolicitud} value={solicitud.comentarios}  /* onChange={(e) => setSolicitudes(((prevState) => {prevState[index].comentarios = e.target.value}))} */ />
                            {/* <Button type="button" onClick={() => handleSubmit(index)}>Guardar</Button> */}
@@ -72,8 +98,8 @@ const TablaSolicitudesPorVacante = ({id}) => {
                             </td>
                             <td>
                                 <ButtonGroup>
-                                    <Button className="mx-1" variant="success" onClick={() => handleSubmit(index)}>Adjudicar</Button>
-                                    <Button className="mx-1" variant="danger">Descartar</Button>
+                                    <Button className="mx-1" variant="success" onClick={() => adjudicarSubmit(solicitud.idSolicitud)}>Adjudicar</Button>
+                                    <Button className="mx-1" variant="danger"onClick={() => cancelarSubmit(solicitud.idSolicitud)}>Descartar</Button>
                                 </ButtonGroup>
                             </td>
                         </tr>

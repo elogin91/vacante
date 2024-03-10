@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { Link } from 'react-router-dom';
 import Guard from '../../components/Guard/Guard';
 import TablaSolicitudesPorVacante from '../../components/Tablas/TablaSolicitudesPorVacante';
-
+import Alert from 'react-bootstrap/Alert';
 
 const DetalleVacante = () => {
   let { id } = useParams();
@@ -19,7 +19,12 @@ const DetalleVacante = () => {
 
   const fetchVacante = async () => {
     try {
-      const response = await fetch("http://localhost:8084/public/verDetalle/" + id);
+      const response = await fetch("http://localhost:8084/vacantes/verDetalle/" + id, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      });
       const data = await response.json();
       setVacante(data);
     } catch (error) {
@@ -30,7 +35,7 @@ const DetalleVacante = () => {
   const submitNuevaSolicitud = async (e) => {
     e.preventDefault();
 
-    const nuevaSolicitud = { archivo, comentario:"NA", estado: 0, fecha: Date.now(), vacante };
+    const nuevaSolicitud = { archivo, comentario: "NA", estado: 0, fecha: Date.now(), vacante };
     const response = await fetch('http://localhost:8084/solicitudes/alta', {
       method: 'POST',
       headers: {
@@ -60,13 +65,19 @@ const DetalleVacante = () => {
           <p>{vacante.detalles}</p>
           <p>Salario:{vacante.salario}</p>
 
+          
           <Guard requiredRoles={["Usuario"]}>
             <Form onSubmit={submitNuevaSolicitud} className='w-75'>
               <Form.Group className='mb-2'>
                 <Form.Label>URL de tu CV</Form.Label>
                 <Form.Control type="text" required placeholder="archivo" value={archivo} onChange={(e) => setArchivo(e.target.value)} />
               </Form.Group>
-              <Button type="submit" variant="success">Solicitar Vacante</Button>
+            <Alert variant="danger"  show={vacante.existeSolicitud} >
+            <p>
+              Botón deshabilitado: Usted ya ha solicitado esta vacante!
+            </p>
+          </Alert>
+              <Button type="submit" variant="success" disabled={vacante.existeSolicitud}>Solicitar Vacante</Button>
             </Form>
           </Guard>
 

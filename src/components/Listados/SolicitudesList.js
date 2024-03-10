@@ -5,6 +5,18 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 function SolicitudesList({ solicitudes }) {
 
+  const cancelarSubmit = async (index) => {
+
+    const response = await fetch('http://localhost:8084/solicitudes/cancelar/'+index, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+
+        },
+
+    });
+};
 
 
   return (
@@ -23,8 +35,10 @@ function SolicitudesList({ solicitudes }) {
           let estadoSolicitud = "";
           if (solicitud.estado === 0) {
             estadoSolicitud = "Pendiente";
+          } else if (solicitud.estado === 1) {
+            estadoSolicitud = "Adjudicada";
           } else {
-            estadoSolicitud = "Proceso cerrado";
+            estadoSolicitud = "Solicitud cancelada o descartada";
           }
           return (
             <tr key={solicitud.idSolicitud}>
@@ -35,7 +49,7 @@ function SolicitudesList({ solicitudes }) {
               <td>
                <ButtonGroup aria-label="Basic example">
               <Link to={`/solicitudes/cancelar/${solicitud.idSolicitud}`}>
-                  <Button className="mx-1" variant="danger">Cancelar</Button>
+                  <Button className="mx-1" variant="danger" onClick={() => cancelarSubmit(solicitud.idSolicitud)}>Cancelar</Button>
               </Link>
               <Link to={`/detalleVacante/${solicitud.vacante.idVacante}`}>
                   <Button className="mx-1" variant="primary">Detalle Vacante</Button>
