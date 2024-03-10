@@ -1,36 +1,34 @@
-// Componente para editar perfil
 import React, { useState, useEffect } from 'react';
 import MyNavBar from '../../components/NavBar/MyNavBar';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 
 const Profile = ({ authToken }) => {
-  const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [username, setUsername] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellidos, setApellidos] = useState('');
+  const [email, setEmail] = useState('');
+
 
   useEffect(() => {
-    // Aquí podrías hacer una solicitud al backend para obtener los datos del perfil del usuario
     const fetchUserProfile = async () => {
       try {
-        setIsLoading(true);
-        const response = await fetch('http://localhost:8084/api/auth/profile', {
+
+        const response = await fetch('http://localhost:8084/profile', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          },
         });
         if (response.ok) {
           const data = await response.json();
-          setPhone(data.phone || '');
-          setAddress(data.address || '');
-        } else {
-          // Manejar errores de respuesta
+          setUsername(data.username || '');
+          setNombre(data.nombre || '');
+          setApellidos(data.apellidos || '');
+          setEmail(data.email || '');
         }
       } catch (error) {
-        // Manejar errores de red
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -38,26 +36,20 @@ const Profile = ({ authToken }) => {
   }, [authToken]);
 
   const handleSave = async () => {
-    // Aquí podrías hacer una solicitud al backend para guardar los datos actualizados del perfil del usuario
     try {
-      setIsLoading(true);
-      const response = await fetch('http://tu-backend.com/profile', {
+      const response = await fetch('http://localhost:8084/profile/modificar', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
-        body: JSON.stringify({ phone, address })
+        body: JSON.stringify({ username, nombre, apellidos, email })
       });
       if (response.ok) {
         // Manejar éxito
-      } else {
-        // Manejar errores de respuesta
       }
     } catch (error) {
       // Manejar errores de red
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -66,19 +58,25 @@ const Profile = ({ authToken }) => {
       <header>
         <MyNavBar></MyNavBar>
       </header>
-      <main>
-        <h2>Editar Perfil</h2>
-        <form onSubmit={handleSave}>
-          <label>
-            Teléfono:
-            <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
-          </label>
-          <label>
-            Dirección:
-            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
-          </label>
-          <button type="submit" disabled={isLoading}>Guardar</button>
-        </form>
+      <main className='container'>
+        <div className='bg-light p-5 rounded'>
+          <h2>Editar Perfil de {username}</h2>
+          <Form onSubmit={handleSave}>
+            <Form.Group className="mb-3" >
+              <Form.Label>Nombre:</Form.Label>
+              <Form.Control type="text" required placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" >
+              <Form.Label>Apellidos:</Form.Label>
+              <Form.Control type="text" required placeholder="Apellidos" value={apellidos} onChange={(e) => setApellidos(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" >
+              <Form.Label>Email:</Form.Label>
+              <Form.Control type="text" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </Form.Group>
+            <Button type="submit">Guardar</Button>
+          </Form>
+        </div>
       </main>
     </div>
   );
