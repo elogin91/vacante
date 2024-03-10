@@ -17,7 +17,7 @@ COPY src src
 RUN mvn -B package -DskipTests
 
 # Usa una imagen base de OpenJDK 11
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:17
 
 # Establece el directorio de trabajo en /app
 WORKDIR /app
